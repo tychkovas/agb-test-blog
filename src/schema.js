@@ -4,6 +4,7 @@ const {gql} = require('apollo-server');
 // that together define the "shape" of queries that are executed against
 // your data.
 const typeDefs = gql`
+  scalar DateTime
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. In this
   # case, the "posts" query returns an array of zero or more posts (defined above).
@@ -16,7 +17,7 @@ const typeDefs = gql`
     createPost(
       title: String!,
       body: String!
-      published_at: String
+      published_at: DateTime
     ): Post
 
     updatePost(id: ID!, content: PostContent!): Post
@@ -25,7 +26,7 @@ const typeDefs = gql`
   input PostContent {
     title: String!,
     body: String!
-    published_at: String
+    published_at: DateTime
   }
 
   "записи в блоге"
@@ -36,7 +37,7 @@ const typeDefs = gql`
     "ссылка на автора"
     author: User
     "дата-время размещения записи"
-    published: String #Data
+    published_at: DateTime
   }
 
   "комментарии к записям"
@@ -46,7 +47,7 @@ const typeDefs = gql`
     "ссылка на автора"
     author: User
     "дата-время размещения комментария"
-    published_at: String #Data
+    published_at: DateTime
   }
 
   "пользователи/авторы"
