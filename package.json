@@ -1,0 +1,24 @@
+{
+  "name": "agb-test-blog",
+  "version": "1.0.0",
+  "description": "Apollo/GraphQL and Bull",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tychkovas/agb-test-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tychkovas/agb-test-blog/issues"
+  },
+  "homepage": "https://github.com/tychkovas/agb-test-blog#readme",
+  "dependencies": {
+    "apollo-server": "^3.8.1",
+    "graphql": "^16.5.0"
+  }
+}
