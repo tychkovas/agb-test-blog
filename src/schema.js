@@ -15,18 +15,29 @@ const typeDefs = gql`
 
   type Mutation {
     createPost(
-      title: String!,
+      title: String!
       body: String!
       published_at: DateTime
     ): Post
 
-    updatePost(id: ID!, content: PostContent!): Post
+    publishPost(content: ContentPublishPost!): ContentPublishPostAnswer
+
+    updatePost(id: ID!, content: ContentPublishPost!): Post
   }
 
-  input PostContent {
+  input ContentPublishPost {
     title: String!,
     body: String!
     published_at: DateTime
+  }
+
+  type ContentPublishPostAnswer {
+    id: ID!
+    title: String!
+    body: String!
+    published_at: DateTime!
+    "author’s nickname"
+    nickname: String
   }
 
   "записи в блоге"
