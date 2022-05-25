@@ -30,6 +30,7 @@ const typeDefs = gql`
 
   "записи в блоге"
   type Post {
+    id: ID!
     title: String!
     body: String!
     "ссылка на автора"
@@ -40,6 +41,7 @@ const typeDefs = gql`
 
   "комментарии к записям"
   type Commnet{
+    id: ID!
     body: String!
     "ссылка на автора"
     author: User
@@ -49,6 +51,7 @@ const typeDefs = gql`
 
   "пользователи/авторы"
   type User {
+    id: ID!
     nickname: String!
     email: String!
     password: String!

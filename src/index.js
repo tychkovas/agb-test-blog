@@ -3,12 +3,14 @@ const typeDefs = require('./schema');
 
 const posts = [
   {
+    id: 'post_id_1',
     title: 'post title 1',
     body: 'post body 1',
     // author: User
     // published: Data
   },
   {
+    id: 'post_id_2',
     title: 'post title 2',
     body: 'post body 2',
   },
