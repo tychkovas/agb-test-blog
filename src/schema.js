@@ -14,7 +14,16 @@ const typeDefs = gql`
     post(id: ID!): Post
   }
 
-  type Mutation {
+  interface MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
+  }
+
+  type Mutation implements MutationResponse {
+    code: String!
+    success: Boolean!
+    message: String!
     createPost(
       title: String!
       body: String!
