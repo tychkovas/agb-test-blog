@@ -53,7 +53,7 @@ const typeDefs = gql`
   }
 
   "комментарии к записям"
-  type Commnet{
+  type Comment{
     id: ID!
     body: String!
     "ссылка на автора"
