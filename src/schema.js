@@ -10,7 +10,8 @@ const typeDefs = gql`
   # case, the "posts" query returns an array of zero or more posts (defined above).
   "Get posts array"
   type Query {
-    posts: [Post]
+    posts(id: ID!): [Post]
+    post(id: ID!): Post
   }
 
   type Mutation {

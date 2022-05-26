@@ -4,14 +4,14 @@ const typeDefs = require('./schema');
 
 const posts = [
   {
-    id: 'post_id_1',
+    id: '1',
     title: 'post title 1',
     body: 'post body 1',
     // author: User
     published_at: () => new Date(Date.UTC(2017, 0, 10, 21, 33, 15, 233))
   },
   {
-    id: 'post_id_2',
+    id: '2',
     title: 'post title 2',
     body: 'post body 2',
     published_at: () => new Date(Date.UTC(2018, 0, 10, 21, 33, 15, 233))
@@ -24,6 +24,10 @@ const resolvers = {
   DateTime: GraphQLDateTime,
   Query: {
     posts: () => posts,
+    post: (parent, args, context, info) => {
+      console.debug('Query post', JSON.stringify(args));
+      return posts.find(post => post.id === args.id);
+    },
   },
 };
 
