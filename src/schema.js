@@ -30,9 +30,10 @@ const typeDefs = gql`
       published_at: DateTime
     ): Post
 
-    publishPost(content: ContentPublishPost!): ContentPublishPostAnswer
+    publishPost(content: ContentPublishPost!): ContentPublishPostAnswer!
 
-    updatePost(id: ID!, content: ContentPublishPost!): Post
+    updatePost(id: ID!, content: ContentPublishPost!): ContentPublishPostAnswer!
+    deletePost(id: ID!): ContentPublishPostAnswer! #TODO return id
   }
 
   input ContentPublishPost {
