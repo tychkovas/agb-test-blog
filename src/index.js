@@ -7,12 +7,14 @@ const posts = [
     id: '1',
     title: 'post title 1',
     body: 'post body 1',
+    authorId: '1',
     // author: User
     published_at: () => new Date(Date.UTC(2017, 0, 10, 21, 33, 15, 233))
   },
   {
     id: '2',
     title: 'post title 2',
+    authorId: '2',
     body: 'post body 2',
     published_at: () => new Date(Date.UTC(2018, 0, 10, 21, 33, 15, 233))
   },
@@ -45,6 +47,12 @@ const resolvers = {
     },
     users: () => users
   },
+  Post: {
+    author: ({ authorId }, _, { dataSources }) => {
+      console.debug('Query author id=', JSON.stringify(authorId));
+      return users.find(user => user.id === authorId);
+    },
+  }
 };
 
 // The ApolloServer constructor requires two parameters: your schema
