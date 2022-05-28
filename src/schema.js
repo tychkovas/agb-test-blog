@@ -13,6 +13,7 @@ const typeDefs = gql`
     posts: [Post]
     post(id: ID!): Post
     users: [User]
+    user(id: ID!): User
   }
 
   interface MutationResponse {
