@@ -10,16 +10,73 @@ const resolvers = {
       return dataSources.PostAPI.getPosts();
     },
     post: (_, args, { dataSources }) => {
-      console.debug('Query post', JSON.stringify(args));
+      console.debug('Query:post', JSON.stringify(args));
       return dataSources.PostAPI.getPost(args.id);
     },
 
     users: (_, __, { dataSources }) => dataSources.PostAPI.getUsers(),
     
     user: (_, args, { dataSources }) => {
-      console.debug('Query user', JSON.stringify(args));
+      console.debug('Query:user', JSON.stringify(args));
       return dataSources.PostAPI.getUser(args.id);
     },
+  },
+
+  Mutation: {
+    // where our new resolver function will go
+    createPost: (_, { content }, {dataSources}) => {
+      console.log('Mutation:createPost', content);
+      const newPost = dataSources.PostAPI.createPost(content);
+      return {
+        code: 200,
+        success: true,
+        message: `Successfully created post ${newPost.title}`,
+        contentPost: newPost,
+      }
+    },
+
+    updatePost: (_, { id, content }, {dataSources}) => {
+      console.log('Mutation:updatePost', id, content);
+      try {
+        const updatedPost = dataSources.PostAPI.updatePost(id, content);
+        return {
+          code: 200,
+          success: true,
+          message: `Successfully update post ${updatedPost.title}`,
+          contentPost: updatedPost,
+        }
+      } catch (e) {
+        console.log('Mutation:updatePost:error:', e.message);
+        return {
+          code: 404,
+          success: false,
+          message: `Error: update post: ${e.message}`,
+          contentPost: null,
+        }
+      }
+    },
+
+    deletePost: (_, { id }, {dataSources}) => {
+      console.log('Mutation:deletePost:id', id);
+      try {
+        const deletedPost = dataSources.PostAPI.deletePost(id);
+        return {
+          code: 200,
+          success: true,
+          message: `Successfully delete post ${deletedPost.title}`,
+          contentPost: deletedPost,
+        }
+      } catch (e) {
+        console.log('Mutation:deletePost:error:', e.message);
+        return {
+          code: 404,
+          success: false,
+          message: `Error: delete post: ${e.message}`,
+          contentPost: null,
+        }
+      }
+    },
+
   },
 
   Post: {
