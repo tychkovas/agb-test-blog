@@ -16,41 +16,46 @@ const typeDefs = gql`
     user(id: ID!): User
   }
 
-  interface MutationResponse {
-    code: String!
-    success: Boolean!
-    message: String!
+  type Mutation {
+    createPost(content: ContentPublishPost!): ContentPostResponse!
+    updatePost(id: ID!, content: ContentPublishPost!): ContentPostResponse!
+    deletePost(id: ID!): ContentPostResponse! #TODO return id
   }
 
-  type Mutation implements MutationResponse {
-    code: String!
+  interface MutationResponse {
+    "Similar to HTTP status code, represents the status of the mutation"
+    code: Int!
+    "Indicates whether the mutation was successful"
     success: Boolean!
-    message: String!
-    createPost(
-      title: String!
-      body: String!
-      published_at: DateTime
-    ): Post
-
-    publishPost(content: ContentPublishPost!): ContentPublishPostAnswer!
-
-    updatePost(id: ID!, content: ContentPublishPost!): ContentPublishPostAnswer!
-    deletePost(id: ID!): ContentPublishPostAnswer! #TODO return id
+    "Human-readable message for the UI"
+    message: String
   }
 
   input ContentPublishPost {
-    title: String!,
+    title: String!
     body: String!
     published_at: DateTime
   }
 
-  type ContentPublishPostAnswer {
+  type ContentPost {
     id: ID!
     title: String!
     body: String!
     published_at: DateTime!
     "author’s nickname"
     nickname: String
+  }
+
+  "Post after a successful mutation"
+  type ContentPostResponse implements MutationResponse {
+    "Similar to HTTP status code, represents the status of the mutation"
+    code: Int!
+    "Indicates whether the mutation was successful"
+    success: Boolean!
+    # "Human-readable message for the UI"
+    message: String!
+    "Content post data"
+    contentPost: ContentPost
   }
 
   "записи в блоге"
