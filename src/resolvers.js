@@ -81,8 +81,15 @@ const resolvers = {
 
   Post: {
     author: ({ authorId }, _, { dataSources }) => {
-      console.debug('Query author id=', JSON.stringify(authorId));
+      console.debug('Post:author:id=', JSON.stringify(authorId));
       return dataSources.PostAPI.getUser(authorId);
+    },
+  },
+
+  ContentPost: {
+    nickname: ({ authorId }, _, { dataSources }) => {
+      console.debug('ContentPost:author:id=', JSON.stringify(authorId));
+      return dataSources.PostAPI.getUser(authorId).nickname;
     },
   }
 };
