@@ -87,6 +87,8 @@ const resolvers = {
   ContentPost: {
     nickname: ({ authorId }, _, { dataSources }) => {
       console.info('ContentPost:author:id=', JSON.stringify(authorId));
+      if (!authorId) return null;
+
       return dataSources.PostAPI.getUser(authorId).nickname;
     },
   },
