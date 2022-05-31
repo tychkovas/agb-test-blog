@@ -8,7 +8,7 @@ const PostAPI = require('./datasources/post-db');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources:() => ({ PostAPI: new PostAPI() }),
+  dataSources: () => ({ PostAPI: new PostAPI() }),
   // csrfPrevention: true,
 });
 
