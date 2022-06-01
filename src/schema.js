@@ -13,11 +13,11 @@ const typeDefs = gql`
     "Query to get pusts array"
     posts: [Post]
     "Fetch a specific post, provided a post's ID"
-    post(id: ID!): Post
+    post(id: Int!): Post
     "Query to get users array"
     users: [User]
     "Fetch a specific user, provided a user's ID"
-    user(id: ID!): User
+    user(id: Int!): User
   }
 
   "Change data"
@@ -25,9 +25,9 @@ const typeDefs = gql`
     "Create new post"
     createPost(content: ContentPublishPost!): ContentPostResponse!
     "Update specific post, provided a post's ID"
-    updatePost(id: ID!, content: ContentPublishPost!): ContentPostResponse!
+    updatePost(id: Int!, content: ContentPublishPost!): ContentPostResponse!
     "Delete specific post by ID"
-    deletePost(id: ID!): ContentPostResponse! #TODO return id
+    deletePost(id: Int!): ContentPostResponse! #TODO return id
   }
 
   "Mutation response common interface"
@@ -47,7 +47,7 @@ const typeDefs = gql`
   }
 
   type ContentPost {
-    id: ID!
+    id: Int!
     title: String!
     body: String!
     published_at: DateTime!
@@ -69,7 +69,7 @@ const typeDefs = gql`
 
   "записи в блоге"
   type Post {
-    id: ID!
+    id: Int!
     title: String!
     body: String!
     "ссылка на автора"
@@ -80,7 +80,7 @@ const typeDefs = gql`
 
   "комментарии к записям"
   type Comment{
-    id: ID!
+    id: Int!
     body: String!
     "ссылка на автора"
     author: User
@@ -90,7 +90,7 @@ const typeDefs = gql`
 
   "пользователи/авторы"
   type User {
-    id: ID!
+    id: Int!
     nickname: String!
     email: String!
     password: String!
