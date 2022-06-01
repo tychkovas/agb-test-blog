@@ -25,7 +25,8 @@
     "graphql-scalars": "^1.17.0",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.20.1"
+    "sequelize": "^6.20.1",
+    "sqlite3": "^5.0.8"
   },
   "devDependencies": {
     "eslint": "^8.16.0",
