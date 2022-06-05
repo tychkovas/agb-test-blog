@@ -18,6 +18,10 @@ const typeDefs = gql`
     users: [User]
     "Fetch a specific user, provided a user's ID"
     user(id: Int!): User
+    "Query to get comments array"
+    comments: [Comment]
+    "Fetch a specific comment, provided a user's ID"
+    comment(id: Int!): Comment
   }
 
   "Change data"
