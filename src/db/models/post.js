@@ -5,8 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: { type: DataTypes.STRING, allowNull: false },
       body: { type: DataTypes.STRING, allowNull: false },
-      published_at: { type: DataTypes.STRING},
-      // author: {},
+      published_at: { type: DataTypes.DATE },
     },
     {}
   );
