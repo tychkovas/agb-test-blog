@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     'Comment',
     {
       body: { type: DataTypes.STRING, allowNull: false },      
-      published_at: { type: Sequelize.DATE },
+      published_at: { type: DataTypes.DATE },
       // author: {},
     },
     {}
