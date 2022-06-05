@@ -15,25 +15,25 @@ const resolvers = {
 
   Mutation: {
     // where our new resolver function will go
-    createPost: (_, { content }, { dataSources }) => {
+    createPost: async (_, { content }, { db }) => {
       console.log('Mutation:createPost', content);
-      const newPost = dataSources.PostAPI.createPost(content);
+      const newPost = await db.createPost(content);
       return {
         code: 200,
         success: true,
-        message: `Successfully created post ${newPost.title}`,
+        message: `Successfully created post '${newPost.title}'`,
         contentPost: newPost,
       };
     },
 
-    updatePost: (_, { id, content }, { dataSources }) => {
-      console.log('Mutation:updatePost', id, content);
+    updatePost: async (_, { id, content }, { db }) => {
+      console.log('Mutation:updatePost:', id, content);
       try {
-        const updatedPost = dataSources.PostAPI.updatePost(id, content);
+        const updatedPost = await db.updatePost(id, content);
         return {
           code: 200,
           success: true,
-          message: `Successfully update post ${updatedPost.title}`,
+          message: `Successfully update post '${updatedPost.title}'`,
           contentPost: updatedPost,
         };
       } catch (e) {
@@ -47,14 +47,14 @@ const resolvers = {
       }
     },
 
-    deletePost: (_, { id }, { dataSources }) => {
+    deletePost: async (_, { id }, { db }) => {
       console.log('Mutation:deletePost:id', id);
       try {
-        const deletedPost = dataSources.PostAPI.deletePost(id);
+        const deletedPost = await db.deletePost(id);
         return {
           code: 200,
           success: true,
-          message: `Successfully delete post ${deletedPost.title}`,
+          message: `Successfully delete post '${deletedPost.title}'`,
           contentPost: deletedPost,
         };
       } catch (e) {
@@ -91,8 +91,7 @@ const resolvers = {
       const { userId } = arg;
       console.info('-resolvers:ContentPost:author:id=', JSON.stringify(arg));
       if (!userId) return null;
-
-      return db.getUser({ id: userId }).nickname;
+      return db.getUser({ id: userId }).then(({ nickname }) => nickname);
     },
   },
 };
