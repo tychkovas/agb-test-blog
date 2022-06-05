@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Apollo/GraphQL and Bull",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon src/index",
     "trace": "nodemon  --trace-deprecation  src/index",
