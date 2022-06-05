@@ -5,19 +5,12 @@ const { GraphQLDateTime } = require('graphql-scalars');
 const resolvers = {
   DateTime: GraphQLDateTime,
   Query: {
-    posts: (_, __, { dataSources }) => dataSources.PostAPI.getPosts(),
-
-    post: (_, args, { dataSources }) => {
-      console.warn('Query:post', JSON.stringify(args));
-      return dataSources.PostAPI.getPost(args.id);
-    },
-
-    users: (_, __, { dataSources }) => dataSources.PostAPI.getUsers(),
-
-    user: (_, args, { dataSources }) => {
-      console.info('Query:user', JSON.stringify(args));
-      return dataSources.PostAPI.getUser(args.id);
-    },
+    posts: (_, __, { db }) => db.getPosts(),
+    post: (_, args, { db }) => db.getPost(args),
+    users: (_, __, { db }) => db.getUsers(),
+    user: (_, args, { db }) => db.getUser(args),
+    comments: (_, __, { db }) => db.getComments(),
+    comment: (_, args, { db }) => db.getComment(args),
   },
 
   Mutation: {
@@ -78,18 +71,28 @@ const resolvers = {
   },
 
   Post: {
-    author: ({ authorId }, _, { dataSources }) => {
-      console.info('Post:author:id=', JSON.stringify(authorId));
-      return dataSources.PostAPI.getUser(authorId);
+    author: async (arg, _, { db }) => {
+      const { userId } = arg;
+      console.info('-resolvers:Post:author:id=', JSON.stringify(arg));
+      return db.getUser({ id: userId });
+    },
+  },
+
+  Comment: {
+    author: async (arg, _, { db }) => {
+      const { userId } = arg;
+      console.info('-resolvers:Comment:author:id=', JSON.stringify(arg));
+      return db.getUser({ id: userId });
     },
   },
 
   ContentPost: {
-    nickname: ({ authorId }, _, { dataSources }) => {
-      console.info('ContentPost:author:id=', JSON.stringify(authorId));
-      if (!authorId) return null;
+    nickname: async (arg, _, { db }) => {
+      const { userId } = arg;
+      console.info('-resolvers:ContentPost:author:id=', JSON.stringify(arg));
+      if (!userId) return null;
 
-      return dataSources.PostAPI.getUser(authorId).nickname;
+      return db.getUser({ id: userId }).nickname;
     },
   },
 };
