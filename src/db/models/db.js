@@ -51,4 +51,31 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.getUsers = async () => {
+  return db.User.findAll();
+}
+
+db.getUser = async (request) => {
+  const { id } = request; 
+  return db.User.findByPk(id);
+}
+
+db.getPosts = async () => {
+  return db.Post.findAll();
+}
+
+db.getPost = async (request) => {
+  const { id } = request; 
+  return db.Post.findByPk(id);
+}
+
+db.getComments = async () => {
+  return db.Comment.findAll();
+}
+
+db.getComment = async (request) => {
+  const { id } = request; 
+  return db.Comment.findByPk(id);
+}
+
 module.exports = db;
