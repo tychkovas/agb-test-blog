@@ -1,4 +1,4 @@
-const { GraphQLDateTime } = require('graphql-scalars');
+import { GraphQLDateTime } from 'graphql-scalars';
 
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves posts from the "posts" array above.
@@ -96,4 +96,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+export default resolvers;
