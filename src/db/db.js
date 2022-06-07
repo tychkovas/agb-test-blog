@@ -1,11 +1,20 @@
-'use strict';
+import fs from 'fs';
+import path, {dirname} from 'path';
+import Sequelize from 'sequelize';
+import { fileURLToPath } from 'url';
+import dbConfig from './config/config.json' assert { type: 'json' }; 
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
+import post from './models/post.js';
+import user from './models/user.js';
+import comment from './models/comment.js';
+
+const basename = fileURLToPath(import.meta.url);
+const __dirname = dirname(basename)
+
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = dbConfig[env];
+console.log('config: ', config);
+
 const db = {};
 
 console.log('__dirname: ', __dirname);
@@ -30,20 +39,11 @@ if (config.use_env_variable) {
 
 sequelize.sync({ logging: (process.env.NODE_ENV !== 'production' ? console.log : null) });
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(
-      sequelize,
-      Sequelize.DataTypes
-    );
-    db[model.name] = model;
-  });
+
+db.Post = post(sequelize, Sequelize.DataTypes);
+db.User = user(sequelize, Sequelize.DataTypes);
+db.Comment = comment(sequelize, Sequelize.DataTypes);
+
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
@@ -121,4 +121,4 @@ db.deletePost = async (id) => {
   return post;
 }
 
-module.exports = db;
+export default db;
