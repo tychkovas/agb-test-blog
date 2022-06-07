@@ -1,15 +1,15 @@
-const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
-const PostAPI = require('./datasources/post-db');
-const db = require('./db/models/db');
+import { ApolloServer } from 'apollo-server';
+
+import typeDefs from './schema.js';
+import resolvers from './resolvers.js';
+
+import db from './db/db.js';
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({ PostAPI: new PostAPI() }),
   // csrfPrevention: true,
   tracing: true,
   context: { db },
