@@ -3,6 +3,7 @@ import { ApolloServer } from 'apollo-server';
 import typeDefs from './schema.js';
 import resolvers from './resolvers.js';
 
+// eslint-disable-next-line import/no-named-as-default-member
 import db from './db/db.js';
 
 // The ApolloServer constructor requires two parameters: your schema
