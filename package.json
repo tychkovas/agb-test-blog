@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --experimental-json-modules src/index",
-    "trace": "nodemon  --trace-deprecation --experimental-json-modules src/index",
+    "start": "nodemon --no-warnings src/index",
+    "trace": "nodemon src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
