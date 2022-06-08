@@ -120,4 +120,6 @@ db.deletePost = async (id) => {
   return post;
 }
 
+export { sequelize };
+
 export default db;
