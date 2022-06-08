@@ -1,14 +1,30 @@
 import { GraphQLDateTime } from 'graphql-scalars';
 
+import userResolvers from './resolvers/user.js';
+// import postResolvers from './resolvers/post.js';
+// import messageResolvers from './resolvers/message.js';
+
+const customScalarResolver = {
+  DateTime: GraphQLDateTime,
+};
+
+const resolvers = [
+  customScalarResolver,
+  userResolvers,
+  // postResolvers,
+  // messageResolvers,
+];
+
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves posts from the "posts" array above.
-const resolvers = {
+// eslint-disable-next-line no-unused-vars
+const resolversOld = {
   DateTime: GraphQLDateTime,
   Query: {
     posts: (_, __, { db }) => db.getPosts(),
     post: (_, args, { db }) => db.getPost(args),
-    users: (_, __, { db }) => db.getUsers(),
-    user: (_, args, { db }) => db.getUser(args),
+    // users: (_, __, { db }) => db.getUsers(),
+    // user: (_, args, { db }) => db.getUser(args),
     comments: (_, __, { db }) => db.getComments(),
     comment: (_, args, { db }) => db.getComment(args),
   },
