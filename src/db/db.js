@@ -1,8 +1,7 @@
-import fs from 'fs';
-import path, {dirname} from 'path';
+import {dirname} from 'path';
 import Sequelize from 'sequelize';
 import { fileURLToPath } from 'url';
-import dbConfig from './config/config.json' assert { type: 'json' }; 
+import config from './config/config.json' assert { type: 'json' };
 
 import post from './models/post.js';
 import user from './models/user.js';
