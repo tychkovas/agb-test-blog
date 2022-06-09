@@ -2,7 +2,7 @@ import { ApolloServer, AuthenticationError } from 'apollo-server';
 
 import jwt from 'jsonwebtoken';
 import DataLoader from 'dataloader';
-import typeDefs from './schema.js';
+import typeDefs from './graphql/schema.js';
 import resolvers from './graphql/resolvers.js';
 
 // eslint-disable-next-line import/no-named-as-default-member
