@@ -3,6 +3,19 @@
     "storage": "./database.sqlite",
     "dialect": "sqlite"
   },
+  "postgres": {
+    "username": "postgresql",
+    "password": "postgres",
+    "database": "agp-db",
+    "port":55432,
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "postgres_env": {
+    "use_env_variable": "DATABASE_URL",
+    "database": "agp-db",
+    "dialect": "postgres"
+  },
   "test": {
     "database": ":memory:",
     "dialect": "sqlite"
