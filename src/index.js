@@ -28,15 +28,29 @@ const getMe = async (req) => {
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
+  // introspection: true,
   typeDefs,
   resolvers,
   // csrfPrevention: true,
   tracing: true,
+  formatError: (error) => {
+    // remove the internal sequelize error message
+    // leave only the important validation error
+    const message = error.message
+      .replace('SequelizeValidationError: ', '')
+      .replace('Validation error: ', '');
+
+    return {
+      ...error,
+      message,
+    };
+  },
   // context: { db },
   context: async ({ req, connection }) => {
     if (connection) {
       return {
         models,
+        db: models,
         loaders: {
           user: new DataLoader((keys) => loaders.user.batchUsers(keys, models)),
         },
@@ -48,6 +62,7 @@ const server = new ApolloServer({
 
       return {
         models,
+        db: models,
         me,
         secret: process.env.SECRET,
         loaders: {
