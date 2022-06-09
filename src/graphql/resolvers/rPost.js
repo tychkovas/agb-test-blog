@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import { combineResolvers } from 'graphql-resolvers';
 
 // import pubsub, { EVENTS } from '../subscription';
-import { isAuthenticated, isMessageOwner } from './authorization';
+import { isAuthenticated, isMessageOwner } from './authorization.js';
 
 const toCursorHash = (string) => Buffer.from(string).toString('base64');
 
