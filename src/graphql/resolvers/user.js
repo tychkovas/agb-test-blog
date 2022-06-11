@@ -53,14 +53,15 @@ export default {
 
     signIn: async (
       parent,
-      { login, password },
+      { nickname, password },
       { models, secret },
     ) => {
-      const user = await models.User.findByLogin(login);
+      console.log('nickname, password: ', nickname, password);
+      const user = await models.User.findByLogin(nickname);
 
       if (!user) {
         throw new UserInputError(
-          'No user found with this login credentials.',
+          'No user found with this nickname credentials.',
         );
       }
 
