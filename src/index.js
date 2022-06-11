@@ -1,5 +1,5 @@
 import { ApolloServer, AuthenticationError } from 'apollo-server';
-
+import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import DataLoader from 'dataloader';
 import typeDefs from './graphql/schema.js';
@@ -8,6 +8,8 @@ import resolvers from './graphql/resolvers.js';
 // eslint-disable-next-line import/no-named-as-default-member
 import models, { sequelize } from './db/db.js';
 import loaders from './loaders/index.js';
+
+console.log('process.env.SECRET: ', process.env.SECRET);
 
 // eslint-disable-next-line consistent-return
 const getMe = async (req) => {
@@ -58,6 +60,9 @@ const server = new ApolloServer({
     }
 
     if (req) {
+      if (req.headers['x-token']) console.log('req: ', req.headers['x-token']);
+      const token = req.headers.authorization || '';
+      if (token) console.log('token: ', token);
       const me = await getMe(req);
 
       return {
@@ -78,7 +83,7 @@ const server = new ApolloServer({
 const createUsersWithMessages = async (date) => {
   await models.User.create(
     {
-      username: 'rwieruch',
+      nickname: 'rwieruch',
       email: 'hello@robin.com',
       password: 'rwieruch',
       role: 'ADMIN',
@@ -96,7 +101,7 @@ const createUsersWithMessages = async (date) => {
 
   await models.User.create(
     {
-      username: 'ddavids',
+      nickname: 'ddavids',
       email: 'hello@david.com',
       password: 'ddavids',
       messages: [
