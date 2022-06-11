@@ -18,7 +18,9 @@ const typeDefs = gql`
     users: [User]
     "Fetch a specific user, provided a user's ID"
     user(id: Int!): User
+
     me: User
+
     "Query to get comments array"
     comments: [Comment]
     "Fetch a specific comment, provided a user's ID"
@@ -35,13 +37,13 @@ const typeDefs = gql`
     deletePost(id: Int!): ContentPostResponse! #TODO return id
 
     signUp(
-      username: String!
+      nickname: String!
       email: String!
       password: String!
     ): Token!
 
     signIn(nickname: String!, password: String!): Token!
-    updateUser(username: String!): User!
+    updateUser(nickname: String!): User!
     deleteUser(id: Int!): Boolean!
   }
 
