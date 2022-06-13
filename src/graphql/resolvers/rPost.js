@@ -5,6 +5,7 @@ import { combineResolvers } from 'graphql-resolvers';
 import { isAuthenticated, isPostOwner } from './authorization.js';
 
 export default {
+  // This resolver retrieves posts from the "posts" array above.
   Query: {
     // posts: (_, __, { models }) => models.getPosts(),
     posts: async (_, { page = 1, per_page: perPage = 3 }, { models }) => {
@@ -135,6 +136,15 @@ export default {
       const { userId } = arg;
       console.info('-resolvers:Post:author:id=', JSON.stringify(arg));
       return db.getUser({ id: userId });
+    },
+  },
+
+  ContentPost: {
+    nickname: async (arg, _, { db }) => {
+      const { userId } = arg;
+      console.info('-resolvers:ContentPost:author:id=', JSON.stringify(arg));
+      if (!userId) return null;
+      return db.getUser({ id: userId }).then(({ nickname }) => nickname);
     },
   },
 
