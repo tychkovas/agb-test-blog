@@ -33,8 +33,9 @@ const server = new ApolloServer({
   // introspection: true,
   typeDefs,
   resolvers,
-  // csrfPrevention: true,
-  tracing: true,
+  csrfPrevention: true,
+  introspection: true,
+  playground: true,
   formatError: (error) => {
     // remove the internal sequelize error message
     // leave only the important validation error
@@ -60,9 +61,9 @@ const server = new ApolloServer({
     }
 
     if (req) {
-      if (req.headers['x-token']) console.log('req: ', req.headers['x-token']);
+      // if (req.headers['x-token']) console.log('req: ', req.headers['x-token']);
       const token = req.headers.authorization || '';
-      if (token) console.log('token: ', token);
+      // if (token) console.log('token: ', token);
       const me = await getMe(req);
 
       return {
@@ -80,23 +81,24 @@ const server = new ApolloServer({
   },
 });
 
-const createUsersWithMessages = async (date) => {
+const createUsersWithPosts = async (date) => {
   await models.User.create(
     {
       nickname: 'rwieruch',
       email: 'hello@robin.com',
       password: 'rwieruch',
-      role: 'ADMIN',
-      messages: [
-        {
-          text: 'Published the Road to learn React',
-          createdAt: date.setSeconds(date.getSeconds() + 1),
-        },
-      ],
+      // role: 'ADMIN',
+      // posts: [
+      //   {
+      //     title: 'Published the Road',
+      //     body: 'Published the Road to learn React',
+      //     published_at: date.setSeconds(date.getSeconds() + 1),
+      //   },
+      // ],
     },
-    {
-      include: [models.Message],
-    },
+    // {
+    //   include: [models.Post],
+    // },
   );
 
   await models.User.create(
@@ -104,20 +106,22 @@ const createUsersWithMessages = async (date) => {
       nickname: 'ddavids',
       email: 'hello@david.com',
       password: 'ddavids',
-      messages: [
-        {
-          text: 'Happy to release ...',
-          createdAt: date.setSeconds(date.getSeconds() + 1),
-        },
-        {
-          text: 'Published a complete ...',
-          createdAt: date.setSeconds(date.getSeconds() + 1),
-        },
-      ],
+    //   posts: [
+    //     {
+    //       title: 'Happy',
+    //       body: 'Happy to release ...',
+    //       published_at: date.setSeconds(date.getSeconds() + 1),
+    //     },
+    //     {
+    //       title: 'Published',
+    //       body: 'Published a complete ...',
+    //       published_at: date.setSeconds(date.getSeconds() + 1),
+    //     },
+    //   ],
     },
-    {
-      include: [models.Message],
-    },
+    // {
+    //   include: [models.Post],
+    // },
   );
 };
 
@@ -132,7 +136,8 @@ const port = process.env.PORT || 4001;
 
 sequelize.sync({ force: isTest || isProduction }).then(async () => {
   if (isTest || isProduction) {
-    createUsersWithMessages(new Date());
+    console.log('isTest || isProduction: ', isTest, isProduction);
+    createUsersWithPosts(new Date());
   }
 
   // The `listen` method launches a web server.
