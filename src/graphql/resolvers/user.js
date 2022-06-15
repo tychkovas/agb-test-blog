@@ -22,7 +22,7 @@ export default {
   Query: {
     users: async (parent, args, { models }) => {
       console.log('Query:users:');
-      models.User.findAll();
+      return models.User.findAll();
     },
     user: async (parent, { id }, { models }) => (
       models.User.findByPk(id)
@@ -83,10 +83,13 @@ export default {
     ),
 
     deleteUser: combineResolvers(
-      isAdmin,
-      async (parent, { id }, { models }) => models.User.destroy({
-        where: { id },
-      }),
+      isAuthenticated, // isAdmin,
+      async (parent, { id }, { models, me }) => {
+        if (id !== me.id) throw new AuthenticationError('Invalid user id.');
+        return models.User.destroy({
+          where: { id },
+        });
+      },
     ),
   },
 
