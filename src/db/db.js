@@ -27,6 +27,7 @@ if (config.use_env_variable) {
     config
   );
 } else {
+  console.log('config.database:', config.database, config.username );
   sequelize = new Sequelize(
     config.database,
     config.username,
