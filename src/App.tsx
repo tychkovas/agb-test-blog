@@ -1,14 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Avatar from 'react-avatar';
+import AvatarEditor from './AvatarEditor';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Avatar name="App logo" src={logo} />
+        <Avatar name="My Avatar" size="300" round="20px"/>
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Edit react <code>src/App.tsx</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -18,6 +21,11 @@ function App() {
         >
           Learn React
         </a>
+        <br />
+        <h3>Load Avatar</h3>
+        <div>
+          <AvatarEditor />
+        </div>
       </header>
     </div>
   );
