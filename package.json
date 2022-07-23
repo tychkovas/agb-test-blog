@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --no-warnings src/index",
+    "start": "node --no-warnings src/index",
     "trace": "nodemon src/index",
     "test:run-server": "npm start",
     "test": "mocha 'tests/*.spec.js'",
