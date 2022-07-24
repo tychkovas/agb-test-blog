@@ -24,7 +24,15 @@ let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(
     process.env[config.use_env_variable],
-    config
+    {
+      dialect: 'postgres',
+      dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+      }
+    }
   );
   console.log('🚀 sequelize ORM(p)', JSON.stringify(config),' DB-conf =', process.env[config.use_env_variable]);
 } else {
