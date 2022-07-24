@@ -1,31 +1,42 @@
 import { Component } from 'react';
+import { Switch, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
 import './App.css';
-import Avatar from 'react-avatar';
-import AvatarEditor from './AvatarEditor';
 
 import DisplayUsers from './components/displayusers.component'
+import Home from './components/home.component'
 
 type Props = {};
 
 type State = {};
 
-// function App() {
 class App extends Component<Props, State> {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <Avatar name="App logo" src={logo} />
-          <DisplayUsers />
-          <Avatar name="My Avatar" size="100" round="20px"/>
-          <br />
-          <h3>Load Avatar</h3>
-          <div>
-            <AvatarEditor />
+      <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <Link to={"/"} className="navbar-brand">
+            Blog
+          </Link>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/home"} className="nav-link">
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/users"} className="nav-link">
+                Users
+              </Link>
+            </li>
           </div>
-        </header>
+        </nav>
+        <div className="container mt-3">
+          <Switch>
+            <Route exact path={["/", "/home"]} component={Home} />
+            <Route path="/users" component={DisplayUsers} />
+          </Switch>
+        </div>
       </div>
     );
   }
