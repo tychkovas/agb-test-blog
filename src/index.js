@@ -131,7 +131,7 @@ const createUsersWithPosts = async (date) => {
 // });
 
 const isTest = !!process.env.TEST_DATABASE;
-const isProduction = !!process.env.DATABASE_URL;
+const isProduction = false; // !!process.env.DATABASE_URL;
 const port = process.env.PORT || 4001;
 
 sequelize.sync({ force: isTest || isProduction }).then(async () => {
