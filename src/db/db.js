@@ -26,6 +26,7 @@ if (config.use_env_variable) {
     process.env[config.use_env_variable],
     config
   );
+  console.log('🚀 sequelize ORM(p)', JSON.stringify(config),' DB-conf =', process.env[config.use_env_variable]);
 } else {
   console.log('config.database:', config.database, config.username );
   sequelize = new Sequelize(
