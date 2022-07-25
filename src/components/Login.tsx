@@ -5,10 +5,8 @@ import * as Yup from "yup";
 // import { login } from "../services/auth.service";
 import { RouteComponentProps } from "react-router-dom";
 
-import { useMutation, gql } from '@apollo/client';
-import { ApolloError} from "@apollo/client";
+import { useMutation, ApolloError } from '@apollo/client';
 import { M_SIGN_IN } from "../apollo/Operations";
-
 interface RouterProps {
   history: string;
 }
@@ -70,7 +68,7 @@ const Login: React.FC<Props> = ({ history }) => {
 
   return (
     <div className="col-md-12">
-      <div className="card card-container" style={{width: '19rem'}} >
+      <div className="card card-container" style={{width: '18rem'}} >
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
