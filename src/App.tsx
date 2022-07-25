@@ -7,7 +7,7 @@ import IUser from './types/user.type';
 
 import DisplayUsers from './components/displayusers.component'
 import Home from './components/home.component'
-import Register from './components/register.component';
+import Register from './components/Register';
 import Login from './components/Login'
 
 type Props = {};
