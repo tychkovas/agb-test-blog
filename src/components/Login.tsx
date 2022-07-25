@@ -7,15 +7,7 @@ import { RouteComponentProps } from "react-router-dom";
 
 import { useMutation, gql } from '@apollo/client';
 import { ApolloError} from "@apollo/client";
-
-const M_SIGN_IN = gql`
-  mutation SignIn($nickname: String!, $password: String!) {
-    signIn(nickname: $nickname, password: $password) {
-      token
-    }
-  }
-`;
-
+import { M_SIGN_IN } from "../apollo/Operations";
 
 interface RouterProps {
   history: string;
