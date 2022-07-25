@@ -1,8 +1,7 @@
 import { InMemoryCache, ApolloClient, gql } from "@apollo/client";
 import { typeDefs } from "./TypeDefs";
-// import link from "./Middlewares";
+import link from "./Middlewares";
 import initCache from "./Cache";
-
 
 let client: ApolloClient<any>;
 
@@ -12,7 +11,7 @@ export const getApolloClient = async (): Promise<ApolloClient<any>> => {
   const cache: InMemoryCache = await initCache();
 
   const apolloClient: ApolloClient<any> = new ApolloClient({
-      uri: 'https://agp-server.herokuapp.com/',
+      link,
       cache,
       connectToDevTools: true, // process.env.NODE_ENV === "development"
       typeDefs,
@@ -31,14 +30,7 @@ export const getApolloClient = async (): Promise<ApolloClient<any>> => {
      }
     `
   })
-  .then((result) => console.log('ApolloClient users =', result));
+  .then((result) => console.log('ApolloClient init =', result));
 
   return apolloClient;
 };
-
-// export const apolloClient: ApolloClient<any> = new ApolloClient({
-//     uri: 'https://agp-server.herokuapp.com/',
-//     cache: new InMemoryCache(),
-// });
-
-
