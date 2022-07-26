@@ -22,8 +22,9 @@ const Login: React.FC<Props> = ({ history }) => {
       console.log(`signIn: onComplet, ${JSON.stringify(data)}`);
       setLoading(false);
       const { token } = data?.signIn
+      console.log('signIn: token: ', token);
       if (token)
-         localStorage.setItem(`token`, JSON.stringify(token));
+         localStorage.setItem('token', token);
       //       history.push("/profile");
       //       window.location.reload();
     },

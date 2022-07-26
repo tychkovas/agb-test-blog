@@ -1,6 +1,6 @@
 export default function authHeader() {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   console.log(`localStorage.getItem token =  ${token}.`);
 

@@ -19,7 +19,7 @@ const Register: React.FC = () => {
       setMessage('signUp OK');
       const { token } = data?.signUp
       if (token)
-         localStorage.setItem(`token`, JSON.stringify(token));
+         localStorage.setItem('token', token);
     },
     onError: (error: ApolloError) => {
       console.log(`signUp: onError, ${JSON.stringify(error)}` );
