@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-// import { login } from "../services/auth.service";
+import { login } from "../services/auth.service";
 import { RouteComponentProps } from "react-router-dom";
 
 import { useMutation, ApolloError } from '@apollo/client';
-import { M_SIGN_IN } from "../apollo/Operations";
+import { M_SIGN_IN, Q_ME } from "../apollo/Operations";
 interface RouterProps {
   history: string;
 }
@@ -23,14 +23,29 @@ const Login: React.FC<Props> = ({ history }) => {
       setLoading(false);
       const { token } = data?.signIn
       console.log('signIn: token: ', token);
-      if (token)
-         localStorage.setItem('token', token);
-      //       history.push("/profile");
-      //       window.location.reload();
+      if (token) {
+         login(token).then(
+          () => {
+            history.push("/profile");
+            window.location.reload();
+          },
+          (error) => {
+            console.log(`signIn:login Error, ${JSON.stringify(error)}` );
+
+            const resMessage =(error && error.message) 
+              || error.message || error.toString();
+            console.log('resMessage: ', resMessage);
+    
+            setLoading(false);
+            setMessage(resMessage);
+          }
+         );
+        //  localStorage.setItem('token', token);
+      }
     },
     onError: (error: ApolloError) => {
       console.log(`signIn: onError, ${JSON.stringify(error)}` );
-      {
+
         const resMessage =(error &&
           error.message) ||
           error.message ||
@@ -39,7 +54,6 @@ const Login: React.FC<Props> = ({ history }) => {
 
           setLoading(false);
           setMessage(resMessage);
-        }
     },
   });
 
