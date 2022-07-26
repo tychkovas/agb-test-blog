@@ -1,5 +1,26 @@
 import {gql } from '@apollo/client';
 
+
+export const Q_USERS = gql`
+  query Users {
+    users {
+    id
+    nickname
+    email
+    }
+  }
+`;
+
+export const Q_ME = gql`
+  query Me {
+    me {
+      id
+      nickname
+      email
+    }
+  }
+`;
+
 export const M_SIGN_IN = gql`
 mutation SignIn($nickname: String!, $password: String!) {
   signIn(nickname: $nickname, password: $password) {
