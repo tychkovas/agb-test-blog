@@ -45,13 +45,13 @@ class AvatarEditor extends React.Component {
     return (
       <div className="container-fluid" >
         <div className="row">
-          <div className="col-2"/>
-          <div className="col-5">
+          {/* <div className="col-2"/> */}
+          <div className="col-6">
             <Avatar
               width={300}
               // height={400}
               imageWidth={300}
-              cropRadius={150}
+              cropRadius={110}
               onCrop={this.onCrop}
               onClose={this.onClose}
               onBeforeFileLoad={this.onBeforeFileLoad}
@@ -60,12 +60,12 @@ class AvatarEditor extends React.Component {
               exportAsSquare
               exportSize={300}
             />
-            <div  style={{paddingTop: 20}}>
+            <div  style={{paddingTop: 20, paddingBottom: 20}}>
               <button onClick={this.onLoadNewImage} type="button" className="btn btn-primary">Load another image</button>
             </div>
           </div>
-          <div className="col-2"/>
-          <div className="col-3 ">
+          <div className="col-1"/>
+          <div className="col-4 ">
             <h5>Preview</h5>
             <img alt="" style={{width: '200px', height: '200px'}} src={this.state.preview}/>
           </div>
