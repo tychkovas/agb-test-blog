@@ -6,7 +6,7 @@ import { login } from "../services/auth.service";
 import { RouteComponentProps } from "react-router-dom";
 
 import { useMutation, ApolloError } from '@apollo/client';
-import { M_SIGN_IN, Q_ME } from "../apollo/Operations";
+import { M_SIGN_IN } from "../apollo/Operations";
 interface RouterProps {
   history: string;
 }
@@ -17,7 +17,7 @@ const Login: React.FC<Props> = ({ history }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
 
-  const [signIn, { loading: LoadingSignIn, error }] = useMutation(M_SIGN_IN, {
+  const [signIn, { loading: LoadingSignIn }] = useMutation(M_SIGN_IN, {
     onCompleted: (data) => {
       console.log(`signIn: onComplet, ${JSON.stringify(data)}`);
       setLoading(false);

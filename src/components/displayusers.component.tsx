@@ -1,4 +1,4 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import { Q_USERS } from "../apollo/Operations";
 
