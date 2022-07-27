@@ -5,5 +5,6 @@ export const getPublicContent = () => {
 };
 
 export const getUserBoard = () => {
-  return  `Token: "${JSON.stringify(authHeader())}".`;
+  const text = `${JSON.stringify(authHeader()).substring(0,30)} ...`;
+  return  `Token: "${text}".`;
 };
