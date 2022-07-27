@@ -1,6 +1,8 @@
 import { getApolloClient } from '../apollo';
 import { Q_ME } from '../apollo/Operations'
 
+import EventBus from "../common/EventBus";
+
 export const logout = () => {
   localStorage.removeItem('user');
   localStorage.removeItem('token');
@@ -23,6 +25,13 @@ export const login = (token: string) => {
           roles: ['user'],
         };
         localStorage.setItem('user', JSON.stringify(user));
+      } else {
+
+        if (response?.errors) {
+          console.log('login:query(Q_ME) errors: ', response?.errors);
+          EventBus.dispatch("logout");
+          logout();
+        }
       }
   
       return user;
