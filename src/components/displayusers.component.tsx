@@ -1,17 +1,9 @@
 import { useQuery, gql } from '@apollo/client';
 
-const GET_USERS = gql`
-  query Users {
-    users {
-    id
-    nickname
-    email
-    }
-  }
-`;
+import { Q_USERS } from "../apollo/Operations";
 
 function DisplayUsers() {
-  const { loading, error, data } = useQuery(GET_USERS);
+  const { loading, error, data } = useQuery(Q_USERS);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :( </p>;
