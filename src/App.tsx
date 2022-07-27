@@ -8,10 +8,13 @@ import IUser from './types/user.type';
 import { logout, getCurrentUser} from "./services/auth.service";
 
 import DisplayUsers from './components/displayusers.component'
+import BoardUser from "./components/BoardUser";
 import Home from './components/home.component'
 import Register from './components/Register';
 import Login from './components/Login'
 import Profile from './components/Profile'
+
+import EventBus from "./common/EventBus";
 
 type Props = {};
 
@@ -37,6 +40,11 @@ class App extends Component<Props, State> {
         currentUser: user
       });
     }
+
+    EventBus.on("logout", this.logOut);
+  }
+  componentWillUnmount() {
+    EventBus.remove("logout", this.logOut);
   }
 
   logOut() {
@@ -66,6 +74,13 @@ class App extends Component<Props, State> {
                 Users
               </Link>
             </li>
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  User
+                </Link>
+              </li>
+            )}
           </div>
 
           {currentUser ? (
@@ -105,6 +120,7 @@ class App extends Component<Props, State> {
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
+            <Route path="/user" component={BoardUser} />
           </Switch>
         </div>
       </div>
