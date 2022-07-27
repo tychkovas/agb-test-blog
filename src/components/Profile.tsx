@@ -14,7 +14,19 @@ const Profile: React.FC = () => {
   //   }
   
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :( </p>;
+  // if (error) return <p>Error :( </p>;
+  if (error)
+  {
+    console.log('error: ', JSON.stringify(error));
+    //logout();
+      return <>
+      <h3>Error authorization User :( </h3>
+      <p>try logging out and back in</p>
+      <p>error: {error.message}</p>
+      <br />
+      <p>{ JSON.stringify(error?.networkError)})</p>
+    </>;
+  }
   if (!data) return <p>Error data=null : ( </p>;
   const { me } = data;
   if (!me) return <p>Error me=null : ( </p>;
