@@ -130,6 +130,20 @@ db.deletePost = async (id) => {
   return post;
 }
 
+db.setAvatarSrc = async (id, src) => {
+  console.log('db:setAvatarSrc: id, src =', id, src);
+  const user = await db.User.findByPk(id);
+  console.log('db:setAvatarSrc:old =', JSON.stringify(user.avatar_src));
+  if (user) {
+    user.avatar_src = src;
+    await user.save();
+  } else {
+    throw new Error('not find user');
+  }
+  console.log(`db:setAvatarSrc:set avatar src user = ${user.avatar_src}`);
+  return user;
+}
+
 export { sequelize };
 
 export default db;
