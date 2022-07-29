@@ -24,12 +24,12 @@ const user = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
-        allowNull: false,
         validate: {
           notEmpty: true,
           len: [4, 42],
         },
       },
+      avatar_src: { type: DataTypes.STRING, allowNull: true },
     },
     {}
   );
