@@ -143,6 +143,7 @@ const typeDefs = gql`
     id: Int!
     nickname: String!
     email: String!
+    avatar_src: String
     # password: String!
   }
 `;
