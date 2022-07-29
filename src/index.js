@@ -62,7 +62,7 @@ const server = new ApolloServer({
 
     if (req) {
       // if (req.headers['x-token']) console.log('req: ', req.headers['x-token']);
-      const token = req.headers.authorization || '';
+      // const token = req.headers.authorization || '';
       // if (token) console.log('token: ', token);
       const me = await getMe(req);
 
@@ -81,7 +81,7 @@ const server = new ApolloServer({
   },
 });
 
-const createUsersWithPosts = async (date) => {
+const createUsersWithPosts = async () => { // date
   await models.User.create(
     {
       nickname: 'rwieruch',

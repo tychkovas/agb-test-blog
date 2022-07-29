@@ -1,8 +1,8 @@
-import Sequelize from 'sequelize';
-import { combineResolvers } from 'graphql-resolvers';
+// import Sequelize from 'sequelize';
+// import { combineResolvers } from 'graphql-resolvers';
 
 // import pubsub, { EVENTS } from '../subscription';
-import { isAuthenticated, isPostOwner } from './authorization.js';
+// import { isAuthenticated, isPostOwner } from './authorization.js';
 
 export default {
   // This resolver retrieves posts from the "posts" array above.
