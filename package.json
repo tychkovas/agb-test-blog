@@ -24,6 +24,7 @@
   "homepage": "https://github.com/tychkovas/agb-test-blog#readme",
   "dependencies": {
     "apollo-server": "^3.8.1",
+    "aws-sdk": "^2.1184.0",
     "bcrypt": "^5.0.1",
     "dataloader": "^2.1.0",
     "dotenv": "^16.0.1",
