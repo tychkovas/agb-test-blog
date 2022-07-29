@@ -5,6 +5,7 @@ import { gql } from 'apollo-server';
 // your data.
 const typeDefs = gql`
   scalar DateTime
+  scalar Upload
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. In this
   # case, the "posts" query returns an array of zero or more posts (defined above).
@@ -25,6 +26,8 @@ const typeDefs = gql`
     comments: [Comment]
     "Fetch a specific comment, provided a user's ID"
     comment(id: Int!): Comment
+
+    hello: String
   }
 
   "Change data"
@@ -45,6 +48,15 @@ const typeDefs = gql`
     signIn(nickname: String!, password: String!): Token!
     updateUser(nickname: String!): User!
     deleteUser(id: Int!): Boolean!
+
+    singleUpload(file: Upload!): UploadedFileResponse!
+  }
+
+  type UploadedFileResponse {
+      filename: String!
+      mimetype: String!
+      encoding: String!
+      url: String!
   }
 
   type Token {
