@@ -19,9 +19,10 @@ export class AWSS3Uploader {
     this.config = config;
   }
 
-  createDestinationFilePath = (fileName) => fileName;
+  // eslint-disable-next-line class-methods-use-this
+  createDestinationFilePath(fileName) { return fileName; }
 
-  createUploadStream = (key) => {
+  createUploadStream(key) {
     const pass = new stream.PassThrough();
     return {
       writeStream: pass,
@@ -33,7 +34,7 @@ export class AWSS3Uploader {
         })
         .promise(),
     };
-  };
+  }
 
   async singleFileUploadResolver(_parent, { file }, _context) {
     const {
