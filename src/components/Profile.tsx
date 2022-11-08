@@ -2,9 +2,14 @@ import React from "react";
 import { getCurrentUser } from "../services/auth.service";
 import Avatar from 'react-avatar';
 import AvatarEditor from '../utils/AvatarEditor';
+import UploadFile from '../utils/UploadFile';
+import logo from '../logo.svg';
 
 const Profile: React.FC = () => {
   const currentUser = getCurrentUser();
+  console.log('logo: ', logo);
+
+  // const avatarImg = localStorage.getItem('preview');
   
   return (
     <div className="container">  
@@ -18,7 +23,7 @@ const Profile: React.FC = () => {
               </h3>
             </div>
             <div className="col-xs">
-              <Avatar name="My Avatar" size="100" round="20px"/>
+              <Avatar name="My Avatar" src={logo} size="100" round="20px"/>
             </div>
           </div>
         </div>
@@ -40,6 +45,8 @@ const Profile: React.FC = () => {
       </ul>
 
       <hr/>
+      <label htmlFor="avatar">Choose a profile picture:</label>
+      <UploadFile />
       <h3>Load Avatar</h3>
       <div className="container bg-secondary" >
         <AvatarEditor />
