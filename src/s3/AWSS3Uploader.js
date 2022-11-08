@@ -39,7 +39,7 @@ export class AWSS3Uploader {
     };
   }
 
-  async singleFileUploadResolver(_parent, { file }, _context) {
+  async singleFileUploadResolver(_parent, { file }, { models, me }) {
     const {
       stream: fileStream, filename, mimetype, encoding,
     } = await file;
@@ -61,8 +61,9 @@ export class AWSS3Uploader {
     const result = await uploadStream.promise;
 
     // Get the link representing the uploaded file
-    // const link = result.Location;
+    const link = result.Location;
     // (optional) save it to our database
+    models.setAvatarSrc(me.id, link);
 
     return {
       filename, mimetype, encoding, url: result.Location,
