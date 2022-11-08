@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk';
 import stream from 'stream';
+import 'dotenv/config';
 
 export class AWSS3Uploader {
   constructor(config) {
@@ -9,10 +10,12 @@ export class AWSS3Uploader {
       accessKeyId: config.accessKeyId,
       secretAccessKey: config.secretAccessKey,
       endpoint: 'https://storage.yandexcloud.net',
-      httpOptions: {
-        timeout: 10000,
-        connectTimeout: 10000
-      },
+      // httpOptions: {
+      //   timeout: 10000,
+      //   connectTimeout: 10000
+      // },
+      sslEnabled: false,
+      s3ForcePathStyle: true,
     });
 
     this.s3 = new AWS.S3();
