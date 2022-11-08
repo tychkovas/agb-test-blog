@@ -1,4 +1,7 @@
-import { ApolloServer, AuthenticationError } from 'apollo-server';
+import express from 'express';
+import { ApolloServer, AuthenticationError } from 'apollo-server-express';
+import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
+
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import DataLoader from 'dataloader';
@@ -33,7 +36,9 @@ const server = new ApolloServer({
   // introspection: true,
   typeDefs,
   resolvers,
+  // Using graphql-upload without CSRF prevention is very insecure.
   csrfPrevention: true,
+  cache: 'bounded',
   introspection: true,
   playground: true,
   formatError: (error) => {
@@ -140,10 +145,22 @@ sequelize.sync({ force: isTest || isProduction }).then(async () => {
     createUsersWithPosts(new Date());
   }
 
+  await server.start();
+
+  const app = express();
+
+  app.use(graphqlUploadExpress());
+
+  server.applyMiddleware({ app });
+
+  await new Promise((r) => { app.listen({ port }, r); });
+
+  console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath} \n\r`);
+
   // The `listen` method launches a web server.
-  server.listen({ port }).then(({ url }) => {
-    console.log(`\n\r🚀  Server ready at ${url} \n\r`);
-  });
+  // server.listen({ port }).then(({ url }) => {
+  //   console.log(`\n\r🚀  Server ready at ${url} \n\r`);
+  // });
 
   // httpServer.listen({ port }, () => {
   //   console.log(`Apollo Server on http://localhost:${port}/graphql`);
