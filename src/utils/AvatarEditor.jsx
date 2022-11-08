@@ -9,15 +9,17 @@ class AvatarEditor extends React.Component {
 
   constructor(props) {
     super(props)
-    const src = './user.png'
+    const preview = localStorage.getItem('preview');
+    console.log('getItem: ');
     this.state = {
-      preview: null,
-      src
+      preview: preview,
+      // src
     }
     this.onCrop = this.onCrop.bind(this)
     this.onClose = this.onClose.bind(this)
     this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
     this.onLoadNewImage = this.onLoadNewImage.bind(this)
+    // this.saveImage = this.saveImage.bind(this)
   }
  
   onClose() {
@@ -40,11 +42,16 @@ class AvatarEditor extends React.Component {
     this.setState({src})
     console.log('src =', src);
   }
+  saveImage = (preview) => {
+    if (preview)
+      localStorage.setItem('preview',  this.state.preview);
+    console.log('saveImage: ', ( this.state.preview)? 'y': 'n');
+  }
   
   render () {
     return (
       <div className="container-fluid" >
-        <div className="row">
+        <div className="row" style={{padding: '10px 0'}}>
           {/* <div className="col-2"/> */}
           <div className="col-6">
             <Avatar
@@ -60,8 +67,8 @@ class AvatarEditor extends React.Component {
               exportAsSquare
               exportSize={300}
             />
-            <div  style={{paddingTop: 20, paddingBottom: 20}}>
-              <button onClick={this.onLoadNewImage} type="button" className="btn btn-primary">Load another image</button>
+            <div  style={{paddingTop: 20, paddingBottom: 10}}>
+              <button onClick={() => this.saveImage(this.state.preview)} type="button" className="btn btn-primary">Save image</button>
             </div>
           </div>
           <div className="col-1"/>
