@@ -22,7 +22,7 @@ module.exports = {
         {
           nickname: 'Joanne',
           email: 'joanne@lyons.com',
-          password: await beforeCreate('joannepass1'),
+          password: await generatePasswordHash('joannepass1'),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
