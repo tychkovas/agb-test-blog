@@ -39,9 +39,9 @@ export class AWSS3Uploader {
     };
   }
 
-  async singleFileUploadResolver(_parent, { file }, { models, me }) {
+  async singleFileUploadResolver(_parent, { file: { file } }, { models, me }) {
     const {
-      stream: fileStream, filename, mimetype, encoding,
+      createReadStream, filename, mimetype, encoding,
     } = await file;
 
     // Create the destination file path
@@ -55,6 +55,8 @@ export class AWSS3Uploader {
     const uploadStream = this.createUploadStream(filePath);
 
     // Pipe the file data into the upload stream
+    const fileStream = createReadStream();
+    // stream.pipe(uploadStream.writeStream);
     fileStream.pipe(uploadStream.writeStream);
 
     // Start the stream
