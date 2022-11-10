@@ -8,6 +8,7 @@ import logo from '../logo.svg';
 const Profile: React.FC = () => {
   const currentUser = getCurrentUser();
   console.log('logo: ', logo);
+  const { avatar_src } = currentUser;
 
   // const avatarImg = localStorage.getItem('preview');
   
@@ -23,7 +24,7 @@ const Profile: React.FC = () => {
               </h3>
             </div>
             <div className="col-xs">
-              <Avatar name="My Avatar" src={logo} size="100" round="20px"/>
+              <Avatar name="My Avatar" src={avatar_src ? avatar_src : logo} size="100" round="20px"/>
             </div>
           </div>
         </div>

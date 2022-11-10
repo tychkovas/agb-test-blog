@@ -7,6 +7,7 @@ export const Q_USERS = gql`
     id
     nickname
     email
+    avatar_src
     }
   }
 `;
@@ -17,6 +18,7 @@ export const Q_ME = gql`
       id
       nickname
       email
+      avatar_src
     }
   }
 `;

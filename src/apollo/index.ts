@@ -26,6 +26,7 @@ export const getApolloClient = async (): Promise<ApolloClient<any>> => {
         id
         nickname
         email
+        avatar_src
         }
      }
     `
