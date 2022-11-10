@@ -1,6 +1,7 @@
 import express from 'express';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
@@ -39,6 +40,7 @@ const server = new ApolloServer({
   // Using graphql-upload without CSRF prevention is very insecure.
   csrfPrevention: true,
   cache: 'bounded',
+  plugins: [ApolloServerPluginLandingPageLocalDefault({ embed: true })],
   introspection: true,
   playground: true,
   formatError: (error) => {
