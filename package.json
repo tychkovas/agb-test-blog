@@ -24,6 +24,7 @@
   "homepage": "https://github.com/tychkovas/agb-test-blog#readme",
   "dependencies": {
     "apollo-server": "^3.8.1",
+    "apollo-server-core": "^3.11.1",
     "apollo-server-express": "^3.10.0",
     "aws-sdk": "^2.1184.0",
     "bcrypt": "^5.0.1",
