@@ -6,6 +6,8 @@ export const typeDefs = gql`
   """
   scalar DateTime
 
+  scalar Upload
+
   """Get data"""
   type Query {
     """Query to get pusts array"""
@@ -26,6 +28,7 @@ export const typeDefs = gql`
 
     """Fetch a specific comment, provided a user's ID"""
     comment(id: Int!): Comment
+    hello: String
   }
 
   """Change data"""
@@ -42,6 +45,14 @@ export const typeDefs = gql`
     signIn(nickname: String!, password: String!): Token!
     updateUser(nickname: String!): User!
     deleteUser(id: Int!): Boolean!
+    singleUpload(file: Upload!): UploadedFileResponse!
+  }
+
+  type UploadedFileResponse {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+    url: String!
   }
 
   type Token {
@@ -136,5 +147,6 @@ export const typeDefs = gql`
     id: Int!
     nickname: String!
     email: String!
+    avatar_src: String
   }
 `;
