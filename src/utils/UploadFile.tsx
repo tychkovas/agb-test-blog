@@ -14,7 +14,7 @@ const UploadFile = () => {
     }
   }: any) => {
     
-    console.log('file: ', JSON.stringify(file));
+    console.log('UploadFile:file: ', file);
     return validity.valid && mutate({ variables: { file } });
   };
 
