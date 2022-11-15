@@ -8,10 +8,11 @@ function DisplayUsers() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :( </p>;
 
-  return data.users.map(({ id, nickname, email }: {id: number, nickname: string, email: string}) => (
+  return data.users.map(({ id, nickname, email, avatar_src }: {id: number, nickname: string, email: string, avatar_src: string | null}) => (
     <div key={id}>
       <h3>nickname:{nickname}</h3>
       <p>email:{email}</p>
+      <p>avatar:{avatar_src}</p>
       <br />
     </div>
   ));
