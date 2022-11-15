@@ -5,10 +5,38 @@ import AvatarEditor from '../utils/AvatarEditor';
 import UploadFile from '../utils/UploadFile';
 import logo from '../logo.svg';
 
+import { useMutation } from '@apollo/client';
+import { SINGLE_UPLOAD  } from "../apollo/Operations";
+
+
 const Profile: React.FC = () => {
   const currentUser = getCurrentUser();
   console.log('logo: ', logo);
-  const { avatar_src } = currentUser;
+  const { avatar_src, nickname } = currentUser;
+
+  const [mutate, { loading, error }] = useMutation(SINGLE_UPLOAD);
+
+  const saveImageFromBase64 = async ( url : string | null) => {
+    if (!url) {
+      console.log('url: = null');
+      return;
+    }
+    console.log('url: ', url.substring(0, 30), ' ... ');
+
+    const file: File = await fetch(url) // url = 'data:image/png;base6....'
+    .then(res => res.blob())
+    .then(blob => {
+      return new File([blob], `AvatarImg_${nickname}.png`,{ type: "image/png" });
+    });
+
+    
+    console.log('file: ', file);
+    return mutate({ variables: { file } });
+  };
+
+
+  if (loading) console.log('Profile:loading:', loading);
+  if (error)   console.log('Profile:error:', JSON.stringify(error, null, 2));
 
   // const avatarImg = localStorage.getItem('preview');
   
@@ -49,8 +77,10 @@ const Profile: React.FC = () => {
       <label htmlFor="avatar">Choose a profile picture:</label>
       <UploadFile />
       <h3>Load Avatar</h3>
+      {loading ? <div>Loading...</div> : null}
+      {error   ? <div>error...{JSON.stringify(error, null, 2)}</div> : null}
       <div className="container bg-secondary" >
-        <AvatarEditor />
+        <AvatarEditor saveImage = {{ saveImageFromBase64, loading, error }} />
       </div>
       <hr/>
       <br/>

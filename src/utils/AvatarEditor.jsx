@@ -3,7 +3,6 @@ import React from 'react';
 // https://kirill3333.github.io/react-avatar/
 import Avatar from 'react-avatar-edit'
 
-const SOURCE_PATH = '';
 
 class AvatarEditor extends React.Component {
 
@@ -19,6 +18,10 @@ class AvatarEditor extends React.Component {
     this.onClose = this.onClose.bind(this)
     this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
     this.onLoadNewImage = this.onLoadNewImage.bind(this)
+    const { saveImageFromBase64, loading, error } = this.props.saveImage;
+    this.saveImage = saveImageFromBase64;
+    this.loading = loading;
+    this.error = error;
     // this.saveImage = this.saveImage.bind(this)
   }
  
@@ -42,15 +45,12 @@ class AvatarEditor extends React.Component {
     this.setState({src})
     console.log('src =', src);
   }
-  saveImage = (preview) => {
-    if (preview)
-      localStorage.setItem('preview',  this.state.preview);
-    console.log('saveImage: ', ( this.state.preview)? 'y': 'n');
-  }
   
   render () {
     return (
       <div className="container-fluid" >
+        {/* {this.loading ? <div>Loading...</div> : null}
+        {this.error   ? <div>{JSON.stringify(this.error, null, 2)}</div> : null} */}
         <div className="row" style={{padding: '10px 0'}}>
           {/* <div className="col-2"/> */}
           <div className="col-6">
