@@ -1,6 +1,7 @@
 import AWS from 'aws-sdk';
 import stream from 'stream';
 import 'dotenv/config';
+import path from 'path';
 
 export class AWSS3Uploader {
   constructor(config) {
@@ -23,7 +24,9 @@ export class AWSS3Uploader {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  createDestinationFilePath(fileName) { return fileName; }
+  createDestinationFilePath(fileName) {
+    return path.join('Avatars', fileName);
+  }
 
   createUploadStream(key) {
     const pass = new stream.PassThrough();
@@ -43,6 +46,8 @@ export class AWSS3Uploader {
     const {
       createReadStream, filename, mimetype, encoding,
     } = await file;
+    console.log('me: ', me);
+    console.log('singleFileUploadResolver:filename: ', filename);
 
     // Create the destination file path
     const filePath = this.createDestinationFilePath(
@@ -64,6 +69,7 @@ export class AWSS3Uploader {
 
     // Get the link representing the uploaded file
     const link = result.Location;
+    console.log('result: ', result);
     // (optional) save it to our database
     models.setAvatarSrc(me.id, link);
 
