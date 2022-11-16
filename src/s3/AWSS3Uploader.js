@@ -65,7 +65,8 @@ export class AWSS3Uploader {
     fileStream.pipe(uploadStream.writeStream);
 
     // Start the stream
-    const result = await uploadStream.promise;
+    const result = await uploadStream.promise
+      .catch((err) => console.log('uploadStream: error: ', err));
 
     // Get the link representing the uploaded file
     const link = result.Location;
